@@ -215,16 +215,3 @@ else:
     signup()
     chatbot()
 
-# os.rename('user.txt','hello.txt')
-# unit conversion - pint
-# weather api
-# file search
-# .exe file
-# seurity issues
-# flask -- html+css+flask
-#      -- dark mode
-#      -- private mode
-#      -- emoji
-# tkinter -- input voice button (google recoginition)
-#        -- private mode
-#        -- improve GUI
