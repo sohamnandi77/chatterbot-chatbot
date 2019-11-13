@@ -52,8 +52,6 @@ open_search = ['do a google search', 'google search',
 tell_age = ['what is my age', 'how old i am', 'my age']
 tell_name = ['what is my name', 'my name']
 open_cmd = ['run cmd', 'can you run cmd commands']
-wh = ['what', 'who', 'where', 'when', 'which', 'how', 'whose', 'whom', 'why']
-que = ['does', 'do', 'is', 'are', 'did', 'will', 'should', 'would', 'shall']
 tell_joke = ['tell me a joke', 'tell joke']
 joke = [line.rstrip('\n') for line in open('jokes.txt')]
 bad_chars = [";", ":", "!", "@", "#", "$", "%", "^", "&", "(", ")", "?",",", ".", "~", "`", "[", "]", "{", "}", "-", "_"] # initializing bad_chars_list
@@ -190,25 +188,7 @@ def chatbot():
 
         elif request in tell_joke:
             print("bot: {}".format((random.choice(joke))))
-        elif any(word in request for word in wh) or request_que[0] in que:
-            response = bot.get_response(request)
-            if response.confidence < 0.99:
-                print("bot: sorry, i don't know that. Do you know that?")
-                user_response = input("you: ").lower()
-                for i in bad_chars:
-                    # using replace() to remove bad_chars
-                    user_response = user_response.replace(i, '')
-                if user_response == "yes":
-                    print('bot: please input the correct one')
-                    correct_response = input("you: ").lower()
-                    with open('files/learn_response.txt', "a") as f:
-                        f.write(str(request) + '\n')
-                        f.write(str(correct_response) + '\n')
-                    learn = open('files/learn_response.txt', "r").readlines()
-                    trainer.train(learn)
-                    print('Responses added to bot!')
-                else:
-                    print("bot: Ok,No problem")
+       
         elif request == "":
             print("bot: you didn't wrote anything. write something please.")
 
@@ -220,108 +200,7 @@ def chatbot():
             with open("edit.txt", "a") as f:
                 f.write(request + '\n')
 
-def private_chatbot():
-    while True:
-        request = input("you: ").lower()
-        for i in bad_chars:
-            request = request.replace(i, '')  # using replace() to remove bad_chars
-        request_que = request.split(" ")
-        if request in open_camera:
-            print("Opening Camera...")
-            os.system('cmd /c "start microsoft.windows.camera:"')  # to open camera
-        elif request in open_calender:
-            print("Opening Calender...")
-            os.system('cmd /c "start outlookcal:"')  # to open calender
-        elif request in open_cortana:
-            print("Opening Cortana...")
-            os.system('cmd /c "start ms-cortana:"')  # to open cortana
-        elif request in open_mail:
-            print("Opening Mail...")
-            os.system('cmd /c "start outlookmail:"')  # to open outlook mail
-        elif request in open_maps:
-            print("Opening Maps...")
-            os.system('cmd /c "start ms-drive-to:"')  # to open maps
-        elif request in open_edge:
-            print("Opening Microsoft Edge...")
-            os.system('cmd /c "start microsoft-edge:"')  # to open microsoft-edge
-        elif request in open_paint:
-            print("Opening Paint3D...")
-            os.system('cmd /c "start ms-paint:"')  # to open paint 3d
-        elif request in open_photos:
-            print("Opening Photos...")
-            os.system('cmd /c "start ms-photos:"')  # to open photos
-        elif request in open_settings:
-            print("Opening Settings...")
-            os.system('cmd /c "start ms-settings:"')  # to open settings
-        elif request in open_security:
-            print("Opening Windows Defender...") # to open windows defender
-            os.system('cmd /c "start windowsdefender:"')
-        elif request in open_store:
-            print("Opening Microsoft Store...")
-            os.system('cmd /c "start ms-store:"')  # to open microsoft store
-        elif request in open_chrome:
-            print("Opening Chrome...") # to open google chrome
-            os.startfile('C:\Program Files (x86)\Google\Chrome\Application\chrome.exe')
-        elif request in open_firefox:
-            print("Opening firefox...") # to open firefox (use \\ for files in user's folder)
-            os.startfile('C:\\Users\\soham\\AppData\\Local\\Mozilla Firefox\\firefox.exe')
-        elif request in open_time:
-            now = datetime.now()
-            current_time = now.strftime("%H:%M:%S")
-            print("bot: The Current Time is ", current_time)
-        elif request in open_date:
-            today = date.today()
-            d = today.strftime("%d/%m/%Y")  # dd/mm/YY
-            print("bot: Today's date is ", d)
-        elif request in open_day:
-            my_date = date.today()
-            day = calendar.day_name[my_date.weekday()]
-            print("bot: today's day is ", day)
-        elif request in open_search:
-            try:
-                query = input("bot: what you want to search on google - ")
-                chrome_path = r'C:\\Users\\soham\\AppData\\Local\\Mozilla Firefox\\firefox.exe %s'
-                if len(Find(query)) == 0:
-                    for url in search(query, tld="co.in", num=1, stop=1, pause=2):
-                        webbrowser.open("https://www.google.com/search?client=firefox-b-d&q=%s" % query)
-                else:
-                    s = Find(query)[0]
-                    for url in search(query, tld="co.in", num=1, stop=1, pause=2):
-                        webbrowser.open(s)
-            except Exception:
-                print("bot: sorry due to low connectivity issues")
 
-        elif request in open_cmd:
-            command = input("write your cmd command here: ")
-            os.system('cmd /c "{}"'.format(command))
-
-        elif request in tell_joke:
-            print("bot: {}".format((random.choice(joke))))
-        elif any(word in request for word in wh) or request_que[0] in que:
-            response = bot.get_response(request)
-            if response.confidence < 0.99:
-                print("bot: sorry, i don't know that. Do you know that?")
-                user_response = input("you: ").lower()
-                for i in bad_chars:
-                    # using replace() to remove bad_chars
-                    user_response = user_response.replace(i, '')
-                if user_response == "yes":
-                    print('bot: please input the correct one')
-                    correct_response = input("you: ").lower()
-                    with open('files/learn_response.txt', "a") as f:
-                        f.write(str(request) + '\n')
-                        f.write(str(correct_response) + '\n')
-                    learn = open('files/learn_response.txt', "r").readlines()
-                    trainer.train(learn)
-                    print('Responses added to bot!')
-                else:
-                    print("bot: Ok,No problem")
-        elif request == "":
-            print("bot: you didn't wrote anything. write something please.")
-
-        else:
-            response = bot.get_response(request)
-            print("bot: " + str(response))
                 
 
 user = input("write your name: ")
