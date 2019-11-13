@@ -71,9 +71,6 @@ bot = ChatBot(
 
 trainer = ListTrainer(bot)  # set the trainer
 
-def signup():
-    dob = input("Enter your date of birth in (YY/mm/dd): ")
-    
 def Find(query):
     # findall() has been used
     # with valid conditions for urls in string
@@ -204,6 +201,7 @@ def chatbot():
                 
 
 user = input("write your name: ")
+dob = input("Enter your date of birth in (YY/mm/dd): ")
 if os.path.isfile(user) == True:
     f = open(user, "r")
     for i in f:
@@ -212,6 +210,5 @@ if os.path.isfile(user) == True:
     print("bot: Welcome back {}".format(user))
     chatbot()
 else:
-    signup()
     chatbot()
 
