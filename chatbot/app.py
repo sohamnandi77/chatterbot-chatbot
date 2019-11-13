@@ -1,6 +1,6 @@
-from chatterbot import ChatBot  # import the chatbot
+from chatterbot import ChatBot  # pip install chatterbot
 from chatterbot.trainers import ListTrainer  # method to train chatbot
-from googlesearch import *
+from googlesearch import * #pip install google
 import webbrowser
 from string import *
 from datetime import *
