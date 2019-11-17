@@ -1,2 +1,0 @@
-chatterbot
-chatterbot_corpus
