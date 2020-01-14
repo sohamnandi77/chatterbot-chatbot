@@ -33,7 +33,7 @@ voices = engine.getProperty('voices')
 # print(voices)
 
 # engine.setProperty('voice', voices[0].id) # 0  for male voice
-engine.setProperty('voice', voices[9].id)  #  1 for female voice
+engine.setProperty('voice', voices[1].id)  #  1 for female voice
 
 #To know all the Default voices in your Laptop --- Run test.py
 
