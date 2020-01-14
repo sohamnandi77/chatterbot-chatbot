@@ -18,8 +18,8 @@ def start_trainer():
         chats = open('files/' + _file, 'r').readlines()
         trainer.train(chats)
 
-try:
-    file=open("file.txt", 'r')
+try: # to run the program exactly once
+    file=open("edit.txt", 'r')
 except FileNotFoundError:
     start_trainer();
-    file=open("file.txt",'w')
+    file=open("edit.txt",'w')
